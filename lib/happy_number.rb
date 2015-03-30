@@ -1,20 +1,11 @@
-class HappyNumber
-	def initialize
-		@results = []		
-	end
-	def is_happy?(number)	
-		discover_number(number)		
-	end
-	private	
-	def discover_number(number)
-		total = 0
-		positions = number.to_s.split('')
-		for i in positions 
-			total += i.to_i ** 2
-		end			
-		return true  if total == 1
-		return false if @results.include?(total)
-		@results.push(total)
-		discover_number(total)
+class HappyNumber	
+	def is_happy?(number)
+	  box = []
+	  while (number > 1) && (!box.include?(number))
+	    box << number
+	    digits = number.to_s.split('').map(&:to_i)
+	    number = digits.inject(0) { |total, value| total += value ** 2 }
+	  end
+	  number == 1
 	end
 end
